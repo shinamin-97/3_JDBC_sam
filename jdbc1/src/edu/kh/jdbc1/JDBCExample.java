@@ -48,7 +48,7 @@ public class JDBCExample {
 			// 1. DB 연결에 필요한 Oracle JDBC Driver 메모리에 로드하기
 													// -> 객체로 만들어 두기
 			
-			Class.forName("");
+			Class.forName("oracle.jdbc.driver.OracleDriver");
 			// -> () 안에 작성된 클래스의 객체를 반환
 			// -> 메모리에 객체가 생성되어지고 JDBC 필요 시 알아서 참조해서 사용
 			// --> 생략해도 자동으로 메모리 로드가 진행됨(명시적으로 작성하는걸 권장)
@@ -105,9 +105,9 @@ public class JDBCExample {
 			
 			while(rs.next()) {
 				// rs.next() : rs가 참조하는 ResultSet 객체
-				// 			첫 번쨰 컬럼부터 순서대로 한 행씩 이동하며
-				// 			다음 행이 있을 경우 true를 반환
-				//			없으면 false 반환
+				// 			   첫 번쨰 컬럼부터 순서대로 한 행씩 이동하며
+				// 			   다음 행이 있을 경우 true를 반환
+				//			   없으면 false 반환
 				
 				// rs.get자료형("컬럼명")
 				String empId = rs.getString("EMP_ID"); // 현재 행의 "EMP_ID" 문자열 컬럼의 값을 얻어옴
