@@ -57,7 +57,7 @@ public class JDBCExample {
 			// --> 생략해도 자동으로 메모리 로드가 진행됨(명시적으로 작성하는걸 권장)
 			
 			// 2. 연결 정보를 담은 Connection을 생성
-			// -> DriverManager 객체를 이영해서 Connection 객체를 만들어 얻어옴!
+			// -> DriverManager 객체를 이용해서 Connection 객체를 만들어 얻어옴!
 			
 			String type = "jdbc:oracle:thin:@"; // JDBC 드라이버의 종류
 			
@@ -100,9 +100,7 @@ public class JDBCExample {
 			rs = stmt.executeQuery(sql);
 			
 			// executeQuery() : SELECT문 수행 메서드, ResultSet 반환	
-			
-			
-			
+						
 			// 3단계 : SQL을 수행해서 결과 반환 받은 결과(ResultSet)를
 			// 			한 행씩 접근해서 컬럼 값 얻어오기
 			
