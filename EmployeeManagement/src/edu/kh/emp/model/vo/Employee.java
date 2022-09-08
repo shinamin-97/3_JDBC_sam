@@ -155,13 +155,7 @@ public class Employee {
 		this.managerId = managerId;
 	}
 
-	@Override
-	public String toString() {
-		return "Employee [empId=" + empId + ", empName=" + empName + ", empNo=" + empNo + ", email=" + email
-				+ ", phone=" + phone + ", departmentTitle=" + departmentTitle + ", jobName=" + jobName + ", salary="
-				+ salary + ", deptCode=" + deptCode + ", jobCode=" + jobCode + ", salLevel=" + salLevel + ", bonus="
-				+ bonus + ", managerId=" + managerId + "]";
-	}
+	
 
 	
 	
