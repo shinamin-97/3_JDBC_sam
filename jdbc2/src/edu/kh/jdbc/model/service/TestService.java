@@ -113,5 +113,22 @@ public class TestService {
 		
 		return res;
 	}
+
+	/** 번호가 일치가 행 제목, 내용 수정 서비스
+	 * @param vo
+	 * @return result
+	 * @throws SQLException
+	 */
+	public int update(TestVO vo) throws SQLException {
+		Connection conn = getConnection();
+		
+		int result = dao.update(conn, vo);
+
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		return result;
+	}
 	
 }
