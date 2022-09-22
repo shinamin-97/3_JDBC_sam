@@ -33,7 +33,7 @@ public class MemberDAO {
 
 	/** 회원 목록 조회 DAO
 	 * @param conn
-	 * @return
+	 * @return memberList
 	 * @throws Exception
 	 */
 	public List<Member> selectAll(Connection conn) throws Exception {
