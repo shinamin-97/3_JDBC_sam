@@ -7,5 +7,4 @@ import edu.kh.jdbc.board.model.dao.CommentDAO;
 public class CommentService {
 	
 	private CommentDAO dao = new CommentDAO();
-
 }

@@ -44,5 +44,12 @@ ORDER BY BOARD_NO DESC
 		
 		</entry>
 		
+		<!-- 조회 수 증가 -->
+	<entry key="increaseReadCount">
+		UPDATE "BOARD" SET
+		READ_COUNT = READ_COUNT + 1
+		WHERE BOARD_NO = ?
+	</entry>
+		
 
 </properties>

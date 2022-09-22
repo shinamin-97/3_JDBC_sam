@@ -14,7 +14,7 @@ import java.util.Properties;
 import edu.kh.jdbc.board.model.vo.Board;
 
 public class BoardDAO {
-	
+
 	private Statement stmt;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
@@ -26,7 +26,7 @@ public class BoardDAO {
 			prop = new Properties();
 			prop.loadFromXML(new FileInputStream("board-query.xml"));
 			
-		}catch(Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -36,21 +36,23 @@ public class BoardDAO {
 	 * @return boardList
 	 * @throws Exception
 	 */
-	public List<Board> selectAllBoard(Connection conn) throws Exception {
-		// 결과 저자용 변수 선언
-		List<Board> boardList = new ArrayList<>();		
+	public List<Board> selectAllBoard(Connection conn) throws Exception{
+		// 결과 저장용 변수 선언
+		List<Board> boardList = new ArrayList<>();
+		
 		try {
 			// SQL 얻어오기
 			String sql = prop.getProperty("selectAllBoard");
 			
 			// Statement 객체 생성
 			stmt = conn.createStatement();
-						
+			
 			// SQL 수행 후 ResultSet결과 반환 받기
 			rs = stmt.executeQuery(sql);
 			
 			// ResultSet에 저장된 값을 List 옮겨 담기
 			while(rs.next()) {
+				
 				int boardNo = rs.getInt("BOARD_NO");
 				String boardTitle = rs.getString("BOARD_TITLE");
 				String memberName = rs.getString("MEMBER_NM");
@@ -67,16 +69,15 @@ public class BoardDAO {
 				board.setCommentCount(commentCount);
 				
 				boardList.add(board);
-				
 			}
 			
 		}finally {
-			// JDBC 객체 자원 반환
+			// 사용한 JDBC 객체 자원 반환
 			close(rs);
-			close(stmt);
-			
+			close(pstmt);
 		}
-		// 조회 겨로가 반환
+		
+		// 조회 결과 반환
 		return boardList;
 	}
 
@@ -91,9 +92,9 @@ public class BoardDAO {
 		Board board = null;
 		
 		try {
-			String sql = prop.getProperty("selectBoard"); // SQL 얻어오기
+			String sql = prop.getProperty("selectBoard");	// SQL 얻어오기
 			
-			pstmt = conn.prepareStatement(sql); // PreparedStatement 생성
+			pstmt = conn.prepareStatement(sql);	// PreparedStatement 생성
 			
 			pstmt.setInt(1, boardNo); // ? 알맞은 값 대입
 			
@@ -102,13 +103,13 @@ public class BoardDAO {
 			if(rs.next()) { // 조회 결과가 있을 경우
 				board = new Board(); // Board 객체 생성 == board는 null 아님
 				
-				board.setBoardNo(		rs.getInt	("BOARD_NO"));
-				board.setBoardTitle(	rs.getString("BOARD_TITLE"));
-				board.setBoardContent(	rs.getString("BOARD_CONTENT"));
-				board.setMemberNo(		rs.getInt	("MEMBER_NO"));
-				board.setMemberName(	rs.getString("MEMBER_NAME"));
-				board.setReadCount(		rs.getInt	("READ_COUNT"));
-				board.setCreateDate(	rs.getString("CREATE_DT"));
+				board.setBoardNo( 		rs.getInt	("BOARD_NO") 		);
+				board.setBoardTitle( 	rs.getString("BOARD_TITLE") 	);
+				board.setBoardContent( 	rs.getString("BOARD_CONTENT") 	);
+				board.setMemberNo( 		rs.getInt	("MEMBER_NO") 		);
+				board.setMemberName( 	rs.getString("MEMBER_NM")		);
+				board.setReadCount( 	rs.getInt	("READ_COUNT") 		);
+				board.setCreateDate(	rs.getString("CREATE_DT") 		);
 			}
 			
 		}finally {
@@ -116,25 +117,32 @@ public class BoardDAO {
 			close(pstmt);
 		}
 		
-		return board; // 조회 결과
+		return board; // 조회 결과 결과
 	}
+
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/** 조회 수 증가 DAO
+	 * @param conn 
+	 * @param boardNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int increaseReadCount(Connection conn, int boardNo) throws Exception {
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("increaseReadCount");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 	

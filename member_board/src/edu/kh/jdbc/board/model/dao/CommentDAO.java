@@ -26,7 +26,7 @@ public class CommentDAO {
 			prop = new Properties();
 			prop.loadFromXML(new FileInputStream("comment-query.xml"));
 			
-		}catch(Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -37,11 +37,11 @@ public class CommentDAO {
 	 * @return commentList
 	 * @throws Exception
 	 */
-	public List<Comment> selectCommentList(Connection conn, int boardNo) throws Exception {
+	public List<Comment> selectCommentList(Connection conn, int boardNo) throws Exception{
 		
 		List<Comment> commentList = new ArrayList<>();
 		
-		try {
+		try{
 			String sql = prop.getProperty("selectCommentList");
 			
 			pstmt = conn.prepareStatement(sql);
@@ -50,13 +50,16 @@ public class CommentDAO {
 			
 			rs = pstmt.executeQuery();
 			
-			
+			while(rs.next()) {
+				Comment comment = new Comment();
 				
+				comment.setCommentNo(rs.getInt(1));
+				comment.setCommentContent(rs.getString(2));
+				comment.setMemberNo(rs.getInt(3));
+				comment.setMemberName(rs.getString(4));
+				comment.setCreateDate(rs.getString(5));
 				
-				
-				SELECT COMMENT_NO, COMMENT_CONTENT,
-			    MEMBER_NO, MEMBER_NM,
-			    TO_CHAR(CREATE_DT, 'YYYY-MM-DD HH24:MI:SS') CREATE_DT
+				commentList.add(comment);
 			}
 			
 		}finally {
@@ -66,21 +69,6 @@ public class CommentDAO {
 		
 		return commentList;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
