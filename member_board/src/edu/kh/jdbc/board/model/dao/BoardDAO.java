@@ -143,6 +143,119 @@ public class BoardDAO {
 		
 		return result;
 	}
+
+	/** 게시글 수정 DAO
+	 * @param conn
+	 * @param board
+	 * @return
+	 * @throws Exception
+	 */
+	public int updateBoard(Connection conn, Board board) throws Exception {
+
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("updateBoard");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, board.getBoardTitle());
+			pstmt.setString(2, board.getBoardContent());
+			pstmt.setInt(3, board.getBoardNo());
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/** 게시글 삭제 DAO
+	 * @param conn
+	 * @param boardNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int deleteBoard(Connection conn, int boardNo) throws Exception {
+
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("deleteBoard");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, boardNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+			
+		} finally {
+			close(pstmt);
+			
+		}
+		return result;
+	}
+
+	/** 게시글 등록 서비스
+	 * @param conn
+	 * @param board
+	 * @return result
+	 * @throws Exception
+	 */
+	public int insertBoard(Connection conn, Board board) throws Exception {
+
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("insertBoard");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, board.getBoardTitle());
+			pstmt.setString(2, board.getBoardContent());
+			pstmt.setInt(3, board.getMemberNo());
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return 0;
+	}
+
+	/** 다음 게시글 번호 생성 DAO
+	 * @param conn
+	 * @return boardNo
+	 */
+	public int nextBoardNo(Connection conn)throws Exception {
+
+		int boardNo = 0;
+		
+		try {
+			
+			String sql = prop.getProperty("nextBoardNo");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery(); // select 수행
+			
+			if(rs.next()) { //  조회 결과 1행 밖에 없음
+				boardNo = rs.getInt(1); //  첫 번째 컬럼값을 얻어와 boardNo에 저장
+			}
+			
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		
+		return boardNo;
+	}
 	
 	
 	
