@@ -123,7 +123,7 @@ public class MainDAO {
 	 * @param conn
 	 * @param memberId
 	 * @param memberPw
-	 * @return Exception
+	 * @return l
 	 * @throws Exception 
 	 */
 	public Member login(Connection conn, String memberId, String memberPw) throws Exception {
