@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>reservation-query.xml file</comment>
+
+<!-- 국산차 조회 -->
+<entry key = "domesticCar">
+SELECT * FROM RESERVATION
+WHERE RESERVATION_AREA = '숭인동'
+</entry>
+
+<!-- 외제차 조회 -->
+<entry key = "foreginCar">
+SELECT * FROM RESERVATION
+WHERE RESERVATION_AREA = '창신동'
+</entry>
+
+<!-- 바이크 조회 -->
+<entry key = "motorcycle">
+SELECT * FROM RESERVATION
+WHERE RESERVATION_AREA = '신설동'
+</entry>
+
+<!-- 예약하기 -->
+<entry key = "reserve">
+INSERT INTO "RESERVATIONLIST"
+VALUES(9, SEQ_RESERVATIONLIST_NO.NEXTVAL, ?, ?, ?, DEFAULT)
+</entry>
+
+<!-- 내 차량 예약 정보 조회 -->
+<entry key = "myReservation">
+SELECT * FROM RESERVATIONLIST
+WHERE MEMBER2_NO = ?
+</entry>
+
+
+
+</properties>

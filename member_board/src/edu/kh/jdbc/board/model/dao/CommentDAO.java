@@ -70,7 +70,7 @@ public class CommentDAO {
 		return commentList;
 	}
 
-	/**
+	/** 댓글 등록 DAO
 	 * @param conn
 	 * @param comment
 	 * @return result

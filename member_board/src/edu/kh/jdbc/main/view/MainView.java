@@ -62,9 +62,10 @@ public class MainView {
 					case 1: login();    break; // 로그인
 
 					case 2:	signUp();	break; // 회원 가입
+					
 					case 0:
-						System.out.println("프로그램 종료");
-						break;
+						System.out.println("프로그램 종료");	break;
+						
 					default:
 						System.out.println("메뉴에 작성된 번호만 입력해주세요.");
 					}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>RentCar-query.xml file</comment>
+
+<!-- 국산차 조회 -->
+<entry key = "domesticCar">
+SELECT * FROM RENTCAR
+WHERE RENTCAR_TITLE = '국산차'
+</entry>
+
+<!-- 외제차 조회 -->
+<entry key = "foreginCar">
+SELECT * FROM RENTCAR
+WHERE RENTCAR_TITLE = '외제차'
+</entry>
+
+<!-- 바이크 조회 -->
+<entry key = "motorcycle">
+SELECT * FROM RENTCAR
+WHERE RENTCAR_TITLE = '바이크'
+</entry>
+
+
+<!-- 차량 이름 검색 -->
+<entry key = "searchRentCar">
+SELECT * FROM RENTCAR
+WHERE RENTCAR_NM = ?
+</entry>
+
+
+</properties>
