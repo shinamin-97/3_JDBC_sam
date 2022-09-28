@@ -165,7 +165,7 @@ public class ReservationView {
 	
 	private void motorcycle() {
 
-		System.out.println("\n[외제차]\n");
+		System.out.println("\n[바이크]\n");
 		
 		try {
 			
